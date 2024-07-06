@@ -3,4 +3,5 @@
 <br>
 [this is also a link](https://brainlos.github.io/option-2/)
 
-<img src="C:\Users\janak\Pictures\skibidi.jpg" alt="Description of the image">
+<img src="https://i.imgur.com/nNcwcXE.jpg">
+<img src="https://i.imgur.com/fajTBjq.jpeg">
