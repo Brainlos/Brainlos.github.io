@@ -5,16 +5,14 @@ if (localStorage.getItem('SukunaVotes') === null) {
     localStorage.setItem('SukunaVotes', '0');
 }
 
-// Add event listener for Gojo votes
 document.getElementById('GojoLink').addEventListener('click', function() {
-    // Dispatch custom event to notify other scripts
-    const event = new CustomEvent('voteGojo');
-    document.dispatchEvent(event);
+    let gojoVotes = parseInt(localStorage.getItem('GojoVotes'), 10);
+    gojoVotes += 1;
+    localStorage.setItem('GojoVotes', gojoVotes.toString());
 });
 
-// Add event listener for Sukuna votes
 document.getElementById('SukunaLink').addEventListener('click', function() {
-    // Dispatch custom event to notify other scripts
-    const event = new CustomEvent('voteSukuna');
-    document.dispatchEvent(event);
+    let sukunaVotes = parseInt(localStorage.getItem('SukunaVotes'), 10);
+    sukunaVotes += 1;
+    localStorage.setItem('SukunaVotes', sukunaVotes.toString());
 });
