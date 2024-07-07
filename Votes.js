@@ -6,7 +6,7 @@ document.getElementById('GojoLink').addEventListener('click', function(VotedGojo
     localStorage.setItem('GojoVotes', GojoPlus.toString());
 });
 
-document.addEventListener('VotedSukuna'.addEventListener('click', function(VotedSukuna) {
+document.addEventListener('VotedSukuna').addEventListener('click', function(VotedSukuna) {
     let SukunaPlus = SukunaVotes + 1;
     localStorage.setItem('SukunaVotes', SukunaPlus.toString());
 });
