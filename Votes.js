@@ -5,22 +5,30 @@ if (localStorage.getItem('SukunaVotes') === null) {
     localStorage.setItem('SukunaVotes', '0');
 }
 
+// Function to update the href attribute of links with current vote count
+function updateLinks() {
+    let gojoVotes = localStorage.getItem('GojoVotes') || '0';
+    let sukunaVotes = localStorage.getItem('SukunaVotes') || '0';
+    document.getElementById('GojoLink').href = `https://brainlos.github.io/Gojo/?gojoVotesSend=${gojoVotes}`;
+    document.getElementById('SukunaLink').href = `https://brainlos.github.io/Sukuna/?sukunaVotesSend=${sukunaVotes}`;
+}
+
+// Add event listeners to increment votes when links are clicked
 document.getElementById('GojoLink').addEventListener('click', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default behavior of anchor tag
     let gojoVotes = parseInt(localStorage.getItem('GojoVotes'), 10);
     gojoVotes += 1;
     localStorage.setItem('GojoVotes', gojoVotes.toString());
-    updateLink('GojoLink', gojoVotes);
+    updateLinks();
 });
 
 document.getElementById('SukunaLink').addEventListener('click', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default behavior of anchor tag
     let sukunaVotes = parseInt(localStorage.getItem('SukunaVotes'), 10);
     sukunaVotes += 1;
     localStorage.setItem('SukunaVotes', sukunaVotes.toString());
-    updateLink('SukunaLink', sukunaVotes);
+    updateLinks();
 });
 
-function updateLink(linkId, votes) {
-    document.getElementById(linkId).href = `https://brainlos.github.io/${linkId.split('Link')[0]}/?${linkId.split('Link')[0]}VotesSend=${votes}`;
-}
+// Initial call to update links with current vote counts
+updateLinks();
