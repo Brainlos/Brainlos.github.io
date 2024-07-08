@@ -5,27 +5,37 @@ if (localStorage.getItem('SukunaVotes') === null) {
     localStorage.setItem('SukunaVotes', '0');
 }
 
-function updateLinks() {
-    let gojoVotes = localStorage.getItem('GojoVotes') || '0';
-    let sukunaVotes = localStorage.getItem('SukunaVotes') || '0';
-    document.getElementById('VoteGojo').href = `https://brainlos.github.io/Gojo/?gojoVotesSend=${gojoVotes}`;
-    document.getElementById('VoteSukuna').href = `https://brainlos.github.io/Sukuna/?sukunaVotesSend=${sukunaVotes}`;
+let hasVoted = localStorage.getItem('hasVoted') === 'true';
+
+function vote(character) {
+    let previousVote = currentVote;
+    currentVote = character;
+    localStorage.setItem('currentVote', currentVote);
+
+    if (previousVote) {
+        let previousVotesKey = previousVote === 'Gojo' ? 'GojoVotes' : 'SukunaVotes';
+        let previousVotes = parseInt(localStorage.getItem(previousVotesKey), 10);
+        previousVotes -= 1;
+        localStorage.setItem(previousVotesKey, previousVotes.toString());
+    }
+
+    let votesKey = character === 'Gojo' ? 'GojoVotes' : 'SukunaVotes';
+    let votes = parseInt(localStorage.getItem(votesKey), 10);
+    votes += 1;
+    localStorage.setItem(votesKey, votes.toString());
+
+    // Inform the user their vote was counted
+    alert(`Your vote for ${character} has been counted!`);
 }
 
 document.getElementById('VoteGojo').addEventListener('click', function(event) {
     event.preventDefault(); 
-    let gojoVotes = parseInt(localStorage.getItem('GojoVotes'), 10);
-    gojoVotes += 1;
-    localStorage.setItem('GojoVotes', gojoVotes.toString());
-    updateLinks();
+    vote(Gojo)
 });
 
 document.getElementById('VoteSukuna').addEventListener('click', function(event) {
     event.preventDefault();
-    let sukunaVotes = parseInt(localStorage.getItem('SukunaVotes'), 10);
-    sukunaVotes += 1;
-    localStorage.setItem('SukunaVotes', sukunaVotes.toString());
-    updateLinks();
+    vote(Sukuna)
 });
 
 updateLinks();
