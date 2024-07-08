@@ -8,11 +8,11 @@ if (localStorage.getItem('SukunaVotes') === null) {
 function updateLinks() {
     let gojoVotes = localStorage.getItem('GojoVotes') || '0';
     let sukunaVotes = localStorage.getItem('SukunaVotes') || '0';
-    document.getElementById('GojoLink').href = `https://brainlos.github.io/Gojo/?gojoVotesSend=${gojoVotes}`;
-    document.getElementById('SukunaLink').href = `https://brainlos.github.io/Sukuna/?sukunaVotesSend=${sukunaVotes}`;
+    document.getElementById('VoteGojo').href = `https://brainlos.github.io/Gojo/?gojoVotesSend=${gojoVotes}`;
+    document.getElementById('VoteSukuna').href = `https://brainlos.github.io/Sukuna/?sukunaVotesSend=${sukunaVotes}`;
 }
 
-document.getElementById('GojoLink').addEventListener('click', function(event) {
+document.getElementById('VoteGojo').addEventListener('click', function(event) {
     event.preventDefault(); 
     let gojoVotes = parseInt(localStorage.getItem('GojoVotes'), 10);
     gojoVotes += 1;
@@ -20,7 +20,7 @@ document.getElementById('GojoLink').addEventListener('click', function(event) {
     updateLinks();
 });
 
-document.getElementById('SukunaLink').addEventListener('click', function(event) {
+document.getElementById('VoteSukuna').addEventListener('click', function(event) {
     event.preventDefault();
     let sukunaVotes = parseInt(localStorage.getItem('SukunaVotes'), 10);
     sukunaVotes += 1;
