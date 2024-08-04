@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,12 +7,50 @@
 </head>
 <body>
     <h1>Who's Better?</h1>
-    <button href="#" id="VoteGojo">Vote Gojo</button>
-    <button href="#" id="VoteSukuna">Vote Sukuna</button>
+    <button href="#" id="VoteGojo" onclick="vote('Gojo')">Vote Gojo</button>
+    <button href="#" id="VoteSukuna" onclick="vote('Sukuna')">Vote Sukuna</button>
     <br>
     <img src="https://i.imgur.com/nNcwcXE.jpg" alt="Gojo Image">
     <img src="https://i.imgur.com/fajTBjq.jpg" alt="Sukuna Image">
 
     <script src="Votes.js"></script>
+    <script>
+        // Initialize votes from localStorage or set to 0 if not present
+        let votes = {
+            'Gojo': parseInt(localStorage.getItem('Gojo')) || 0,
+            'Sukuna': parseInt(localStorage.getItem('Sukuna')) || 0
+        };
+
+        // Function to handle voting
+        function vote(char) {
+            // Get the user's current vote from localStorage
+            let currentVote = localStorage.getItem('currentVote');
+
+            // If the user has already voted and is changing their vote
+            if (currentVote) {
+                if (currentVote !== char) {
+                    // Decrease the vote count for the previous vote
+                    votes[currentVote] -= 1;
+                    localStorage.setItem(currentVote, votes[currentVote]);
+
+                    // Increase the vote count for the new vote
+                    votes[char] += 1;
+                    localStorage.setItem(char, votes[char]);
+
+                    // Update the current vote in localStorage
+                    localStorage.setItem('currentVote', char);
+                    alert(`You changed your vote to ${char}. ${char} now has ${votes[char]} votes!`);
+                } else {
+                    alert(`You have already voted for ${char}.`);
+                }
+            } else {
+                // If the user has not voted yet, cast the vote
+                votes[char] += 1;
+                localStorage.setItem(char, votes[char]);
+                localStorage.setItem('currentVote', char); // Mark the user's current vote
+                alert(`${char} now has ${votes[char]} votes!`);
+            }
+        }
+    </script>
 </body>
 </html>
